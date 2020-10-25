@@ -13,15 +13,15 @@ app.use(contactRouter);
 app.use(userRouter);
  
 
-const url = 'mongodb://localhost:27017/jem_brandDB';
+const url = config.DATABASE_URL;
 const connect = mongoose.connect(url);
 connect.then((db) => {
   console.log(" The server is currently connected correctly");
 }, (err) => { console.log(err); });
 
 
-// const PORT = config.PORT;
+const PORT = config.PORT;
 
-const PORT=4000;
+// const PORT=4000;
 
 app.listen(PORT, ()=> console.log(`App running on port ${PORT}`));
