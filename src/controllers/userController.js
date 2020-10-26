@@ -1,5 +1,6 @@
 import User from '../models/userModel';
 import bcrypt from 'bcryptjs';
+import generateToken  from '../helpers/token';
 
 export const signup= async (req, res) => {
     try {
@@ -11,21 +12,37 @@ export const signup= async (req, res) => {
         }
         
         const salt = await bcrypt.genSalt(10);
-        const hashPass = await bcrypt.hash(password, salt)
+        const PassH = await bcrypt.hash(password, salt);
+
+        // const token = await generateToken(checkUser);
 
         const newUser =  new User({
             firstName,
             lastName,
             email,
-            password: hashPass
+            password: PassH
         });
-
         const savedUser = await newUser.save();
-        return res.status(201).json({msg: 'Account created successfully', savedUser})
+        return res.status(201).json({msg: 'User account created successfully', savedUser});
     } catch (err) {
         return res.status(500).json({error: err.message})
     }
 };
+
+
+// USER SIGN UP
+
+export const signups = (req,res,next)=>{
+    User.create(req.body)
+     .then((user) => {
+        console.log('User Created ', user);
+        res.statusCode = 200;
+        res.json(user);
+    }, (err) => next(err))
+    .catch((err) => next(err));
+ }
+
+
 
 
 //  SELECT ONE USER BY ID
@@ -94,7 +111,9 @@ export const login = async (req, res) => {
         const isValidPass = await bcrypt.compare(password, checkAccount.password)
         if (!isValidPass) return res.status(400).json({error: 'Invalid password!'});
 
-        return res.status(200).json({msg: 'logged in successfully!'})
+        const token = await generateToken(checkAccount);
+
+        return res.status(200).json({msg: 'Logged in successfully!', token})
 
     } catch (err) {
         return res.status(500).json({error: err.message})

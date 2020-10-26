@@ -1,9 +1,12 @@
 import mongoose from 'mongoose';
 
-const userSchema = mongoose.Schema({
+
+const User = mongoose.model('Users', new mongoose.Schema({
     firstName: {
         type: String,
-        required: true
+        required: true,
+        minlength: 2,
+        maxlength: 100
     },  
    lastName: {
         type: String,
@@ -30,8 +33,6 @@ const userSchema = mongoose.Schema({
         type: Date,
         default: new Date()
     }    
-});
-
-const User = mongoose.model('User', userSchema);
+}));
 
 export default User;

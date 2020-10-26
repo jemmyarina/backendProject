@@ -1,7 +1,11 @@
 import jwt  from 'jsonwebtoken';
+import config from '../config/config';
 
-const generateToken = (user) => {
-    return jwt.sign(user, 'abc123', { expiresIn: '600s' });
+ const generateToken = (user) => {
+    const {firstName, lastName, email, _id}=user;
+    const secreteKey = config.SECRETE_KEY;
+
+    return jwt.sign({firstName, lastName, email, _id}, secreteKey, { expiresIn: '600s' });
 }
 
-console.log(generateToken({name: 'peter'}));
+export default generateToken;
