@@ -56,7 +56,7 @@ export const createblog = (req,res,next)=>{
 
 
 // UPDATING A BLOG
- exports.updateBlog = async (req, res, next) =>{
+ export const updateBlog = async (req, res, next) =>{
     try {
        const blog = await Blog.findByIdAndUpdate({ _id: req.params.id }, req.body);
        const updatedBlog = await Blog.findOne({ _id: req.params.id });

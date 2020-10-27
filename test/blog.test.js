@@ -56,7 +56,7 @@ describe('POSTING DATA IN A BLOG', ()=>{
 
 
 //  GET ALL RECORDS
-describe('GET DATA GROM A BLOG COLLECTION', ()=>{
+describe('GET ALL DATA FROM A BLOG COLLECTION', ()=>{
     
     beforeEach( async()=>{
         const user = { 
@@ -124,7 +124,7 @@ describe('MODIFYING DATA IN A BLOG', ()=>{
 
 
 
- // DELETE BLOG TESTING 
+ // DELETE A BLOG BY ID TESTING 
 describe('DELETING  A BLOG', ()=>{
     let blog;
     beforeEach( async()=>{
@@ -146,7 +146,7 @@ describe('DELETING  A BLOG', ()=>{
     });
     afterEach(async () => await Blog.remove());
     
-    it('It should delete a blog', async(done)=>{
+    it('It should delete a blog by ID', async(done)=>{
         const blogToDelete = await Blog(blog);
         const deletedBlog = await blogToDelete.save();
         const id = deletedBlog._id;

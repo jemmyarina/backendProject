@@ -1,5 +1,6 @@
 import Message from '../models/contactModel';
 
+  //  POST MESSAGES 
 export const createContact = (req,res,next)=>{
     Message.create(req.body)
      .then((contact) => {
@@ -35,7 +36,7 @@ export const createContact = (req,res,next)=>{
 
  // DELETING A CONTACT
  
- exports.deleteContact= async (req, res, next) => {    
+ export const deleteContact= async (req, res, next) => {    
      let { id } = req.params;        
       
          const existContact = await Message.find({ _id: id });  

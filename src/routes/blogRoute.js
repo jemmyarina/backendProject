@@ -6,7 +6,7 @@ const blogRouter = express.Router();
 
 blogRouter.post('/insertBlog', auth,createblog);
 blogRouter.get('/selectBlog/:id', auth,readOneBlog);
-blogRouter.get('/selectBlogs', auth,readAllblogs);
+blogRouter.get('/selectBlogs',readAllblogs);
 blogRouter.delete('/deleteBlog/:id', auth,deleteBlog);
 blogRouter.put('/updateBlog/:id', auth,updateBlog);
 

@@ -3,7 +3,7 @@ import config from '../config/config';
 
 export const auth = (req, res, next)=>{
     const token = req.header('auth-token');
-    if(!token) return res.status(401).json({msg: 'please, login'});
+    if(!token) return res.status(401).json({msg: 'please, sign in first'});
 
     try{
         const secreteKey = config.SECRETE_KEY;
@@ -11,6 +11,6 @@ export const auth = (req, res, next)=>{
         req.user = verified;
         return next();
     }catch(err){
-        return res.status(403).json({message: 'invalid token'});
+        return res.status(403).json({message: 'Your token has expired'});
     }
 }
