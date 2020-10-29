@@ -92,13 +92,13 @@ describe('GETTING DATA OF ALL USERS', ()=>{
 
     afterEach(async () => await User.remove());
     
-    it('It should get all users', async(done)=>{
+    it('It should get all users', async()=>{
        const res = await request (app)
             .get('/selectUsers')
             .set('auth-token', token)
         
         expect(res.status).toBe(200);  
-        done();
+        // done();
     });     
 });
 
@@ -126,7 +126,7 @@ describe('MODIFYING DATA OF A USER', ()=>{
     });
     afterEach(async () => await User.remove());
     
-    it('It should update a user', async(done)=>{
+    it('It should update a user', async()=>{
         const updatedUser = await User(user);
         const id = updatedUser._id;
         const res = await request (app)
@@ -140,7 +140,7 @@ describe('MODIFYING DATA OF A USER', ()=>{
             })
         
         expect(res.status).toBe(200);  
-        done();
+        // done();
     });     
 });
 
