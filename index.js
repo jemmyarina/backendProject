@@ -1,9 +1,9 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import config from './config/config';
-import blogRouter from './routes/blogRoute';
-import contactRouter from './routes/contactRoute';
-import userRouter from './routes/userRoute';
+import config from './src/config/config';
+import blogRouter from './src/routes/blogRoute';
+import contactRouter from './src/routes/contactRoute';
+import userRouter from './src/routes/userRoute';
 
 const app = express();
 app.use(express.json());
@@ -19,6 +19,6 @@ connect.then((db) => {
 
 const PORT = config.PORT;
 
-app.listen(PORT, ()=> console.log(`App running on port ${PORT}`));
+// app.listen(PORT, ()=> console.log(`App running on port ${PORT}`));
 
 export default app;
