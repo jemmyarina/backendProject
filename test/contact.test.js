@@ -1,7 +1,7 @@
 import Message from '../src/models/contactModel';
 import request from 'supertest';
 import config from '../src/config/config';
-import app from '../src/index';
+import app from '../src/app';
 import generateToken from '../src/helpers/token';
 import mongoose from 'mongoose';
 

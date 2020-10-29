@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">77.42% </span>
+                <span class="strong">74.19% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>24/31</span>
+                <span class='fraction'>23/31</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">77.42% </span>
+                <span class="strong">74.19% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>24/31</span>
+                <span class='fraction'>23/31</span>
             </div>
         
             
@@ -115,18 +115,7 @@
 <a name='L56'></a><a href='#L56'>56</a>
 <a name='L57'></a><a href='#L57'>57</a>
 <a name='L58'></a><a href='#L58'>58</a>
-<a name='L59'></a><a href='#L59'>59</a>
-<a name='L60'></a><a href='#L60'>60</a>
-<a name='L61'></a><a href='#L61'>61</a>
-<a name='L62'></a><a href='#L62'>62</a>
-<a name='L63'></a><a href='#L63'>63</a>
-<a name='L64'></a><a href='#L64'>64</a>
-<a name='L65'></a><a href='#L65'>65</a>
-<a name='L66'></a><a href='#L66'>66</a>
-<a name='L67'></a><a href='#L67'>67</a>
-<a name='L68'></a><a href='#L68'>68</a>
-<a name='L69'></a><a href='#L69'>69</a>
-<a name='L70'></a><a href='#L70'>70</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L59'></a><a href='#L59'>59</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
@@ -164,6 +153,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -175,22 +165,10 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -232,46 +210,35 @@ export const createContact = (req,res,next)=&gt;{
  }
 &nbsp;
  // DELETING A CONTACT
- 
+&nbsp;
+&nbsp;
  export const deleteContact= async (req, res, next) =&gt; {    
-     let { id } = req.params;        
-      
-         const existContact = await Message.find({ _id: id });  
-        <span class="missing-if-branch" title="else path not taken" >E</span>if (existContact.length) { 
-            
-        try {                
-            const deletedContact = await Message.deleteOne({ _id: id });                
-            res.status(200).send(`Contact is deleted ${existBContact}`);           
-         }            
-        catch (error) {    
-            res.status(500).json({error: "not deleted"});                    
-        };       
-         }        
-        else { <span class="cstat-no" title="statement not covered" >res.status(404).json({ status: 403, error: 'Contact Id does not exist' });        </span>
-        };    
- }
+    let { id } = req.params;        
+     
+        const existContact = await Message.find({ _id: id });  
+       <span class="missing-if-branch" title="else path not taken" >E</span>if (existContact.length) { 
+           
+       try {                
+           const deletedContact = await Message.deleteOne({ _id: id });                
+           res.status(200).send(`Contact is deleted ${existContact}`);           
+        }            
+       catch (error) {    
+<span class="cstat-no" title="statement not covered" >           res.status(500).json({error: "not deleted"});                    </span>
+       };       
+        }        
+       else { <span class="cstat-no" title="statement not covered" >res.status(404).json({ status: 403, error: 'Contact Id does not exist' });        </span>
+       };    
+}
 &nbsp;
 &nbsp;
-// // UPDATING A CONTACT
-//  exports. updateContact = async (req, res, next) =&gt;{
-//     try {
-//        const Contact = await Contact.findByIdAndUpdate({ _id: req.params.id }, req.body);
-//        const updatedBContact = await Contact.findOne({ _id: req.params.id });
-//        res.status(200).send(updatedContact);
-//     }
-//     catch {
-//            res.status(400).json(`Error: ${error}`);
-//     }
-// }
-&nbsp;
-// export default Message;</pre></td></tr></table></pre>
+export default Message;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue Oct 27 2020 00:10:55 GMT+0200 (Central Africa Time)
+                at Thu Oct 29 2020 05:10:27 GMT+0200 (Central Africa Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

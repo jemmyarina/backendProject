@@ -1,7 +1,7 @@
 import request from 'supertest';
 import config from '../src/config/config';
 import Blog from '../src/models/blogModel';
-import app from '../src/index';
+import app from '../src/app';
 import generateToken from '../src/helpers/token';
 import mongoose from 'mongoose';
  
@@ -28,7 +28,7 @@ describe('POSTING DATA IN A BLOG', ()=>{
             _id: mongoose.Types.ObjectId().toHexString(),
             firstName : "Samuel",
             lastName : "Musirikare",
-            email : "samuelm@gmail.com",
+            email : "samuel3m@gmail.com",
             password : "samuel123"
         }
         blog = {
