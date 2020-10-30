@@ -14,10 +14,8 @@ const Blog = mongoose.model('Blog', new mongoose.Schema({
         required: true
     },
     bPublisher: {
-        type: String,
-        minlength: 2,
-        maxlength: 100,
-        required: true
+        firstName: String,
+        lastName: String
     },
     bDatePublished: {
         type: Date,
