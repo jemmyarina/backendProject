@@ -138,6 +138,7 @@ describe('DELETING  A MESSAGE BY ID', ()=>{
         const res = await request (app)
             .get(`/selectContact/${id}`)
             .set('auth-token', token)
+            .set('role', 'admin')
         
         expect(res.status).toBe(200);  
         // done();
