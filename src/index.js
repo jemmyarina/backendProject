@@ -11,6 +11,10 @@ app.use(blogRouter);
 app.use(contactRouter);
 app.use(userRouter);
 
+app.use('/', (req, res) => {
+  res.status(200).json({message: 'Welcome to Jemima- dev website!'})
+});
+
 const url = config.DATABASE_URL;
 const connect = mongoose.connect(url);
 connect.then((db) => {
