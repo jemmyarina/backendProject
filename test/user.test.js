@@ -1,10 +1,9 @@
 import request from 'supertest';
 import config from '../src/config/config';
-import Blog from '../src/models/userModel';
-import app from '../src/index';
+import User from '../src/models/userModel';
+import app from '../src/app';
 import generateToken from '../src/helpers/token';
 import mongoose from 'mongoose';
-import { response } from 'express';
 
 const dbURL = config.DATABASE_URL_test;
 
@@ -19,45 +18,66 @@ let token;
 
 
 // POST
-describe('POSTING DATA IN A BLOG', ()=>{
-
-    let blog;
-    
+describe('POSTING DATA WITH SIGNUP', ()=>{
+    let sign;
     beforeEach(()=>{
-        const user = { 
-            _id: mongoose.Types.ObjectId().toHexString(),
-            firstName : "Samuel",
-            lastName : "Musirikare",
-            email : "samuelm@gmail.com",
-            password : "samuel123"
+        sign = {
+            firstName : "Peter", 
+            lastName : "Mugabo", 
+            email : "mugabo@gmail.com",
+            password : "1234567"
         }
-        blog = {
-            bTitle : "SOFTWARE TESTING MODULE", 
-            bContent : "AAAAABBBBBCCCCDDDDEEEEE", 
-            bPublisher : user.firstName,
-            bPhoto : ""
-        }
-        token = generateToken(user);
-    })
+    });
 
-    afterEach(async () => await Blog.deleteMany());
+    afterEach(async () => await User.deleteMany());
     
-    it('It should insert a new blog', async()=>{
+    it('It should send and save a new message', async()=>{
         await request (app)
-            .post('/insertBlog')
-            .set('auth-token', token)
-            .send(blog);
+            .post('/insertUser')
+            .send(sign);
         
-        expect(blog).not.toBe(null);  
+        expect(sign).not.toBe(null);  
     })
         
 })
 
+// //DELETING A USER
+//  describe('DELETING  A USER', ()=>{
+//     let user;
+//     beforeEach( async()=>{
+//         const user = { 
+//             _id: mongoose.Types.ObjectId().toHexString(),
+//             firstName : "jemima",
+//             lastName : "safari",
+//             email : "jemima123@gmail.com",
+//             password : "jemaim123"
+//         }
+//         token = generateToken(user);
 
+//         user = {
+//             firstName : "dan", 
+//             lastName : "iriho", 
+//             email : 'dan123@gmail.com',
+//             password : "dan123"
+//         }
+//     });
+//     afterEach(async () => await User.remove());
+    
+//     it('It should delete a user by ID', async(done)=>{
+//         const userToDelete = await User(user);
+//         const deletedUser = await userToDelete.save();
+//         const id = deletedUser._id;
+//         const res = await request (app)
+//             .delete(`/deleteUser/${id}`)
+//             .set('auth-token', token)
+        
+//         expect(res.status).toBe(200);  
+//         done();
+//     });     
+// });
 
-
-// PUT
-describe('MODIFYING DATA IN A BLOG', ()=>{
+// GET
+describe('GETTING DATA OF ALL USERS', ()=>{
     
     beforeEach( async()=>{
         const user = { 
@@ -70,20 +90,60 @@ describe('MODIFYING DATA IN A BLOG', ()=>{
         token = generateToken(user);
     });
 
-    afterEach(async () => await Blog.remove());
+    afterEach(async () => await User.remove());
     
-    it('It should read a blog', async(done)=>{
+    it('It should get all users', async()=>{
        const res = await request (app)
-            .get('/selectBlogs')
+            .get('/selectUsers')
             .set('auth-token', token)
         
         expect(res.status).toBe(200);  
-        done();
+        // done();
     });     
 });
 
 
+        
+// UPDATE USER TESTING 
+describe('MODIFYING DATA OF A USER', ()=>{
+    let user;
+    beforeEach( async()=>{
+        const userr = { 
+            _id: mongoose.Types.ObjectId().toHexString(),
+            firstName : "jemima",
+            lastName : "safari",
+            email : "jemima123m@gmail.com",
+            password : "jemima123"
+        }
+        token = generateToken(userr);
+
+        user = {
+            firstName : "dan",
+            lastName : "iriho",
+            email : "dan123m@gmail.com",
+            password : "dan123"
+        }
+    });
+    afterEach(async () => await User.remove());
     
+    it('It should update a user', async()=>{
+        const updatedUser = await User(user);
+        const id = updatedUser._id;
+        const res = await request (app)
+            .put(`/updateUser/${id}`)
+            .set('auth-token', token)
+            .send({
+                firstName : "dan",
+                lastName : "iriho",
+                email : "danm@gmail.com",
+                password : "dan123"
+            })
+        
+        expect(res.status).toBe(200);  
+        // done();
+    });     
+});
+
 
 
  

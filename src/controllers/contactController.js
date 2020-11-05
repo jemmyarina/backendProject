@@ -35,36 +35,24 @@ export const createContact = (req,res,next)=>{
  }
 
  // DELETING A CONTACT
- 
+
+
  export const deleteContact= async (req, res, next) => {    
-     let { id } = req.params;        
-      
-         const existContact = await Message.find({ _id: id });  
-        if (existContact.length) { 
-            
-        try {                
-            const deletedContact = await Message.deleteOne({ _id: id });                
-            res.status(200).send(`Contact is deleted ${existBContact}`);           
-         }            
+    let { id } = req.params;        
+     
+        const existContact = await Message.findByIdAndDelete({ _id: id });  
+       
+       
+    if (existContact.length===0) { 
+            res.status(404).json({ status: 403, error: 'Contact Id does not exist' });        
+       }
+       try {                              
+        res.status(200).send(`Contact is deleted ${existContact}`);           
+     }            
         catch (error) {    
-            res.status(500).json({error: "not deleted"});                    
-        };       
-         }        
-        else { res.status(404).json({ status: 403, error: 'Contact Id does not exist' });        
-        };    
- }
+        res.status(500).json({error: "not deleted"});                    
+    };   
+}
 
 
-// // UPDATING A CONTACT
-//  exports. updateContact = async (req, res, next) =>{
-//     try {
-//        const Contact = await Contact.findByIdAndUpdate({ _id: req.params.id }, req.body);
-//        const updatedBContact = await Contact.findOne({ _id: req.params.id });
-//        res.status(200).send(updatedContact);
-//     }
-//     catch {
-//            res.status(400).json(`Error: ${error}`);
-//     }
-// }
-
-// export default Message;
+export default Message;

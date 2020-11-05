@@ -1,7 +1,7 @@
 import request from 'supertest';
 import config from '../src/config/config';
 import Blog from '../src/models/blogModel';
-import app from '../src/index';
+import app from '../src/app';
 import generateToken from '../src/helpers/token';
 import mongoose from 'mongoose';
  
@@ -28,7 +28,7 @@ describe('POSTING DATA IN A BLOG', ()=>{
             _id: mongoose.Types.ObjectId().toHexString(),
             firstName : "Samuel",
             lastName : "Musirikare",
-            email : "samuelm@gmail.com",
+            email : "samuel3m@gmail.com",
             password : "samuel123"
         }
         blog = {
@@ -71,13 +71,13 @@ describe('GET ALL DATA FROM A BLOG COLLECTION', ()=>{
 
     afterEach(async () => await Blog.remove());
     
-    it('It should read a blog', async(done)=>{
+    it('It should read a blog', async()=>{
        const res = await request (app)
             .get('/selectBlogs')
             .set('auth-token', token)
         
         expect(res.status).toBe(200);  
-        done();
+        // done();
     });     
 });
 
@@ -105,7 +105,7 @@ describe('MODIFYING DATA IN A BLOG', ()=>{
     });
     afterEach(async () => await Blog.remove());
     
-    it('It should update a blog', async(done)=>{
+    it('It should update a blog', async()=>{
         const updatedBlog = await Blog(blog);
         const id = updatedBlog._id;
         const res = await request (app)
@@ -118,7 +118,7 @@ describe('MODIFYING DATA IN A BLOG', ()=>{
             })
         
         expect(res.status).toBe(200);  
-        done();
+        // done();
     });     
 });
 
@@ -146,7 +146,7 @@ describe('DELETING  A BLOG', ()=>{
     });
     afterEach(async () => await Blog.remove());
     
-    it('It should delete a blog by ID', async(done)=>{
+    it('It should delete a blog by ID', async()=>{
         const blogToDelete = await Blog(blog);
         const deletedBlog = await blogToDelete.save();
         const id = deletedBlog._id;
@@ -155,7 +155,7 @@ describe('DELETING  A BLOG', ()=>{
             .set('auth-token', token)
         
         expect(res.status).toBe(200);  
-        done();
+        // done();
     });     
 });
 
@@ -182,7 +182,7 @@ describe('DELETING  A BLOG', ()=>{
     });
     afterEach(async () => await Blog.remove());
     
-    it('It should GET a blog', async(done)=>{
+    it('It should GET a blog', async()=>{
         const blogToGet = await Blog(blog);
         const gotBlog = await blogToGet.save();
         const id = gotBlog._id;
@@ -191,6 +191,6 @@ describe('DELETING  A BLOG', ()=>{
             .set('auth-token', token)
         
         expect(res.status).toBe(200);  
-        done();
+        // done();
     });     
 });

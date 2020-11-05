@@ -1,14 +1,27 @@
 import Blog from '../models/blogModel';
 
 //  INSERT A BLOG 
-export const createblog = (req,res,next)=>{
-    Blog.create(req.body)
-     .then((blog) => {
-        console.log('Blog Created ', blog);
-        res.statusCode = 200;
-        res.json(blog);
-    }, (err) => next(err))
-    .catch((err) => next(err));
+export const createblog = async (req,res,next)=>{
+    try {
+        const { bTitle, bContent} = req.body;
+        const { firstName, lastName } = req.user;
+
+        const blog = await Blog.findOne({bTitle});
+        
+        if (blog) return res.status(400).json({msg: 'Blog published before'})
+        
+        const newBlog = await Blog({
+            bTitle,
+            bPublisher: { firstName, lastName },
+            bContent
+        })
+
+        const savedBlog = await newBlog.save();
+
+        return res.status(201).json({msg: 'blog created', savedBlog})
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
  }
 
  //  SELECT ONE BLOG BY ID

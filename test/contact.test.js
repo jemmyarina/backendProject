@@ -1,7 +1,7 @@
 import Message from '../src/models/contactModel';
 import request from 'supertest';
 import config from '../src/config/config';
-import app from '../src/index';
+import app from '../src/app';
 import generateToken from '../src/helpers/token';
 import mongoose from 'mongoose';
 
@@ -62,13 +62,13 @@ describe('GET ALL DATA FROM CONTACTS COLLECTION', ()=>{
 
     afterEach(async () => await Message.remove());
     
-    it('It should read all messages received', async(done)=>{
+    it('It should read all messages received', async()=>{
        const res = await request (app)
             .get('/selectContacts')
             .set('auth-token', token)
         
         expect(res.status).toBe(200);  
-        done();
+        // done();
     }); 
     
 });
@@ -96,7 +96,7 @@ describe('DELETING  A MESSAGE BY ID', ()=>{
     });
     afterEach(async () => await Message.remove());
     
-    it('It should delete a message by ID', async(done)=>{
+    it('It should delete a message by ID', async()=>{
         const messageToDelete = await Message(message);
         const deletedMessage = await messageToDelete.save();
         const id = deletedMessage._id;
@@ -105,7 +105,7 @@ describe('DELETING  A MESSAGE BY ID', ()=>{
             .set('auth-token', token)
         
         expect(res.status).toBe(200);  
-        done();
+        // done();
     });     
 });
 
@@ -131,15 +131,16 @@ describe('DELETING  A MESSAGE BY ID', ()=>{
     });
     afterEach(async () => await Message.remove());
     
-    it('It should GET MESSAGE', async(done)=>{
+    it('It should GET MESSAGE', async()=>{
         const messageToGet = await Message(message);
         const gotMessage = await messageToGet.save();
         const id = gotMessage._id;
         const res = await request (app)
             .get(`/selectContact/${id}`)
             .set('auth-token', token)
+            .set('role', 'admin')
         
         expect(res.status).toBe(200);  
-        done();
+        // done();
     });     
 });
