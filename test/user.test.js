@@ -29,7 +29,7 @@ describe('POSTING DATA WITH SIGNUP', ()=>{
         }
     });
 
-    afterEach(async () => await User.deleteMany());
+    // afterEach(async () => await User.deleteMany());
     
     it('It should send and save a new message', async()=>{
         await request (app)
@@ -82,15 +82,16 @@ describe('GETTING DATA OF ALL USERS', ()=>{
     beforeEach( async()=>{
         const user = { 
             _id: mongoose.Types.ObjectId().toHexString(),
-            firstName : "Simon",
-            lastName : "Musirikare",
-            email : "samuelm@gmail.com",
-            password : "samuel1234"
+            firstName : 'Simon',
+            lastName : 'Musirikare',
+            email : 'samuelm@gmail.com',
+            password : 'samuel1234',
+            admin: true
         }
         token = generateToken(user);
     });
 
-    afterEach(async () => await User.remove());
+    // afterEach(async () => await User.remove());
     
     it('It should get all users', async()=>{
        const res = await request (app)
@@ -124,7 +125,7 @@ describe('MODIFYING DATA OF A USER', ()=>{
             password : "dan123"
         }
     });
-    afterEach(async () => await User.remove());
+    // afterEach(async () => await User.remove());
     
     it('It should update a user', async()=>{
         const updatedUser = await User(user);

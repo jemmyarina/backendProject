@@ -11,7 +11,7 @@ userRouter.post('/insertUser', signup);
 userRouter.get('/selectUser/:id', [auth, admin],readOneUser);
 userRouter.get('/selectUsers', [auth, admin],readAllusers);
 userRouter.delete('/deleteUser/:id', [auth, admin],deleteUser);
-userRouter.put('/updateUser/:id', [auth, admin],updateUser);
+userRouter.put('/updateUser/:id', auth,updateUser);
 
 userRouter.post('/login', login);
 

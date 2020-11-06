@@ -37,9 +37,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">6.25% </span>
+                <span class="strong">12.5% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/16</span>
+                <span class='fraction'>2/16</span>
             </div>
         
             
@@ -188,22 +188,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -250,10 +250,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -308,23 +308,23 @@ export const signup= async (req, res) =&gt; {
         const { firstName, lastName, email, password} = req.body;
 &nbsp;
         const checkUser = await User.findOne({email});
-        <span class="missing-if-branch" title="if path not taken" >I</span>if (checkUser) {
-<span class="cstat-no" title="statement not covered" >            return res.status(400).json({error: 'Email already exist!'});</span>
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (checkUser) {
+            return res.status(400).json({error: 'Email already exist!'});
         }
         
-        const salt = await bcrypt.genSalt(10);
-        const PassH = await bcrypt.hash(password, salt);
+        const salt = <span class="cstat-no" title="statement not covered" >await bcrypt.genSalt(10);</span>
+        const PassH = <span class="cstat-no" title="statement not covered" >await bcrypt.hash(password, salt);</span>
 &nbsp;
         // const token = await generateToken(checkUser);
 &nbsp;
-        const newUser =  new User({
+        const newUser =  <span class="cstat-no" title="statement not covered" >new User({</span>
             firstName,
             lastName,
             email,
             password: PassH
         });
-        const savedUser = await newUser.save();
-        return res.status(201).json({msg: 'User account created successfully', savedUser});
+        const savedUser = <span class="cstat-no" title="statement not covered" >await newUser.save();</span>
+<span class="cstat-no" title="statement not covered" >        return res.status(201).json({msg: 'User account created successfully', savedUser});</span>
     } catch (err) {
 <span class="cstat-no" title="statement not covered" >        return res.status(500).json({error: err.message})</span>
     }
@@ -370,11 +370,11 @@ export const readAllusers= <span class="fstat-no" title="function not covered" >
  }
 &nbsp;
 //  UPDATE A USER 
- export const updateUser= <span class="fstat-no" title="function not covered" >as</span>ync (req, res, next) =&gt;{
-<span class="cstat-no" title="statement not covered" >    try {</span>
-       const user = <span class="cstat-no" title="statement not covered" >await User.findByIdAndUpdate({ _id: req.params.id }, req.body);</span>
-       const updatedUser= <span class="cstat-no" title="statement not covered" >await User.findOne({ _id: req.params.id });</span>
-<span class="cstat-no" title="statement not covered" >       res.status(200).send(updatedUser);</span>
+ export const updateUser= async (req, res, next) =&gt;{
+    try {
+       const user = await User.findByIdAndUpdate({ _id: req.params.id }, req.body);
+       const updatedUser= await User.findOne({ _id: req.params.id });
+       res.status(200).send(updatedUser);
     }
     catch {
 <span class="cstat-no" title="statement not covered" >           res.status(400).json(`Error: ${error}`);</span>
@@ -427,7 +427,7 @@ export const login = <span class="fstat-no" title="function not covered" >as</sp
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 05 2020 23:03:17 GMT+0200 (Central Africa Time)
+                at Fri Nov 06 2020 21:34:14 GMT+0200 (Central Africa Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>
