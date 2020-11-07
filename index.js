@@ -1,9 +1,9 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import config from './config/config';
-import blogRouter from './routes/blogRoute';
-import contactRouter from './routes/contactRoute';
-import userRouter from './routes/userRoute';
+import config from './src/config/config';
+import blogRouter from './src/routes/blogRoute';
+import contactRouter from './src/routes/contactRoute';
+import userRouter from './src/routes/userRoute';
 
 const app = express();
 app.use(express.json());
@@ -15,7 +15,7 @@ app.use('/', (req, res) => {
   res.status(200).json({message: 'Welcome to Jemima- dev website!'})
 });
 
-const url = config.DATABASE_URL;
+const url = config.DATABASE_URL1;
 const connect = mongoose.connect(url);
 connect.then((db) => {
   console.log(" The server is currently connected correctly");
