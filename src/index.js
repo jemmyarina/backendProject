@@ -1,9 +1,9 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import config from './src/config/config';
-import blogRouter from './src/routes/blogRoute';
-import contactRouter from './src/routes/contactRoute';
-import userRouter from './src/routes/userRoute';
+import config from './config/config';
+import blogRouter from './routes/blogRoute';
+import contactRouter from './routes/contactRoute';
+import userRouter from './routes/userRoute';
 
 const app = express();
 app.use(express.json());
