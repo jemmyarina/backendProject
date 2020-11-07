@@ -15,11 +15,7 @@ app.use('/', (req, res) => {
   res.status(200).json({message: 'Welcome to Jemima- dev website!'})
 });
 
-<<<<<<< HEAD
-const c = config.DATABASE_URL;
-=======
 const url = config.DATABASE_URL1;
->>>>>>> 6708fcb8dbf6bff72964d42f9b1b64d23bda680a
 const connect = mongoose.connect(url);
 connect.then((db) => {
   console.log(" The server is currently connected correctly");
