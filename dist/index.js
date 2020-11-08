@@ -24,15 +24,25 @@ app.use(_express["default"].json());
 app.use(_blogRoute["default"]);
 app.use(_contactRoute["default"]);
 app.use(_userRoute["default"]);
-var url = _config["default"].DATABASE_URL;
+app.use('/', function (req, res) {
+  res.status(200).json({
+    message: 'Welcome to Jemima- dev website!'
+  });
+});
+var option = {
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
+  useNewUrlParser: true
+};
+var url = _config["default"].DATABASE_URL1;
 
-var connect = _mongoose["default"].connect(url);
-
-connect.then(function (db) {
+_mongoose["default"].connect(url, option).then(function (db) {
   console.log(" The server is currently connected correctly");
-}, function (err) {
+})["catch"](function (err) {
   console.log(err);
 });
+
 var PORT = _config["default"].PORT;
 app.listen(PORT, function () {
   return console.log("App running on port ".concat(PORT));

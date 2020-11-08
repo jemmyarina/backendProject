@@ -15,11 +15,17 @@ app.use('/', (req, res) => {
   res.status(200).json({message: 'Welcome to Jemima- dev website!'})
 });
 
+const option = {
+  useUnifiedTopology: true,    
+  useCreateIndex: true,    
+  useFindAndModify: false,    
+  useNewUrlParser: true
+};
+
 const url = config.DATABASE_URL1;
-const connect = mongoose.connect(url);
-connect.then((db) => {
+mongoose.connect(url, option).then((db) => {
   console.log(" The server is currently connected correctly");
-}, (err) => { console.log(err); });
+}).catch((err) => { console.log(err)});
 
 const PORT = config.PORT;
 
