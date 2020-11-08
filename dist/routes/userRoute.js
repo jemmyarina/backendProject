@@ -21,7 +21,7 @@ userRouter.post('/insertUser', _userController.signup);
 userRouter.get('/selectUser/:id', [_authentication.auth, _authentication.admin], _userController.readOneUser);
 userRouter.get('/selectUsers', [_authentication.auth, _authentication.admin], _userController.readAllusers);
 userRouter["delete"]('/deleteUser/:id', [_authentication.auth, _authentication.admin], _userController.deleteUser);
-userRouter.put('/updateUser/:id', [_authentication.auth, _authentication.admin], _userController.updateUser);
+userRouter.put('/updateUser/:id', _authentication.auth, _userController.updateUser);
 userRouter.post('/login', _userController.login);
 var _default = userRouter;
 exports["default"] = _default;
