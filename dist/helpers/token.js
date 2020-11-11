@@ -15,15 +15,17 @@ var generateToken = function generateToken(user) {
   var firstName = user.firstName,
       lastName = user.lastName,
       email = user.email,
-      _id = user._id;
+      _id = user._id,
+      admin = user.admin;
   var secreteKey = _config["default"].SECRETE_KEY;
   return _jsonwebtoken["default"].sign({
     firstName: firstName,
     lastName: lastName,
     email: email,
-    _id: _id
+    _id: _id,
+    admin: admin
   }, secreteKey, {
-    expiresIn: '90000s'
+    expiresIn: '900000s'
   });
 };
 

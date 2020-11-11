@@ -5,7 +5,7 @@ import {createContact, readAllContacts, readOneContact, deleteContact} from '../
 const contactRouter = express.Router();
 
 contactRouter.post('/insertContact', createContact);
-contactRouter.get('/selectContact/:id', [auth,admin],readOneContact);
+contactRouter.get('/selectContact/:id', auth,readOneContact);
 contactRouter.get('/selectContacts', [auth,admin], readAllContacts);
 contactRouter.delete('/deleteContact/:id', [auth,admin], deleteContact);
 
