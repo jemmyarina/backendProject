@@ -17,8 +17,8 @@ var _userController = require("../controllers/userController");
 var userRouter = _express["default"].Router(); // userRouter.post('/insertUser1', user_signup1);
 
 
-userRouter.post('/insertUser', _userController.signup);
-userRouter.get('/selectUser/:id', [_authentication.auth, _authentication.admin], _userController.readOneUser);
+userRouter.post('/insertUser', _userController.signup); // userRouter.get('/selectUser/:id', [auth, admin],readOneUser);
+
 userRouter.get('/selectUsers', [_authentication.auth, _authentication.admin], _userController.readAllusers);
 userRouter["delete"]('/deleteUser/:id', [_authentication.auth, _authentication.admin], _userController.deleteUser);
 userRouter.put('/updateUser/:id', _authentication.auth, _userController.updateUser);

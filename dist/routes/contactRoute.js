@@ -16,7 +16,7 @@ var _contactController = require("../controllers/contactController");
 var contactRouter = _express["default"].Router();
 
 contactRouter.post('/insertContact', _contactController.createContact);
-contactRouter.get('/selectContact/:id', [_authentication.auth, _authentication.admin], _contactController.readOneContact);
+contactRouter.get('/selectContact/:id', _authentication.auth, _contactController.readOneContact);
 contactRouter.get('/selectContacts', [_authentication.auth, _authentication.admin], _contactController.readAllContacts);
 contactRouter["delete"]('/deleteContact/:id', [_authentication.auth, _authentication.admin], _contactController.deleteContact);
 var _default = contactRouter;

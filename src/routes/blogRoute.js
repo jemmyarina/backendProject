@@ -6,9 +6,9 @@ import commentController from '../controllers/commentController'
 const blogRouter = express.Router();
 
 blogRouter.post('/insertBlog', auth,createblog);
-blogRouter.get('/selectBlog/:id', auth,readOneBlog);
+// blogRouter.get('/selectBlog/:id', auth,readOneBlog);
 blogRouter.get('/selectBlogs',readAllblogs);
-blogRouter.delete('/deleteBlog/:id', [auth, admin ],deleteBlog);
+blogRouter.delete('/deleteBlog/:id', auth,deleteBlog);
 blogRouter.put('/updateBlog/:id', auth,updateBlog);
 
 // comments Routes

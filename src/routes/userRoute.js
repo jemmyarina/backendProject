@@ -8,7 +8,7 @@ const userRouter = express.Router();
 
 // userRouter.post('/insertUser1', user_signup1);
 userRouter.post('/insertUser', signup);
-userRouter.get('/selectUser/:id', [auth, admin],readOneUser);
+// userRouter.get('/selectUser/:id', [auth, admin],readOneUser);
 userRouter.get('/selectUsers', [auth, admin],readAllusers);
 userRouter.delete('/deleteUser/:id', [auth, admin],deleteUser);
 userRouter.put('/updateUser/:id', auth,updateUser);

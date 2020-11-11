@@ -17,10 +17,10 @@ var _commentController = _interopRequireDefault(require("../controllers/commentC
 
 var blogRouter = _express["default"].Router();
 
-blogRouter.post('/insertBlog', _authentication.auth, _blogController.createblog);
-blogRouter.get('/selectBlog/:id', _authentication.auth, _blogController.readOneBlog);
+blogRouter.post('/insertBlog', _authentication.auth, _blogController.createblog); // blogRouter.get('/selectBlog/:id', auth,readOneBlog);
+
 blogRouter.get('/selectBlogs', _blogController.readAllblogs);
-blogRouter["delete"]('/deleteBlog/:id', [_authentication.auth, _authentication.admin], _blogController.deleteBlog);
+blogRouter["delete"]('/deleteBlog/:id', _authentication.auth, _blogController.deleteBlog);
 blogRouter.put('/updateBlog/:id', _authentication.auth, _blogController.updateBlog); // comments Routes
 
 blogRouter.post('/comments/:_id', _authentication.auth, _commentController["default"].addComment);

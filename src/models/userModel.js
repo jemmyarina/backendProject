@@ -1,16 +1,16 @@
 import mongoose from 'mongoose';
-
-
-const User = mongoose.model('Users', new mongoose.Schema({
+const User = mongoose.model('User', new mongoose.Schema({
+    admin: {
+        type: Boolean,
+        default: false
+    },
     firstName: {
         type: String,
-        required: true,
-        minlength: 2,
-        maxlength: 100
+        required: true
     },  
    lastName: {
         type: String,
-        required: false
+        required: true
     },
     email: {
         type: String,
@@ -19,21 +19,15 @@ const User = mongoose.model('Users', new mongoose.Schema({
     password: {
         type: String,
         minlength: 6,
-        maxlength: 200,
         required: true
     },
-    role: {
-        type: String,
-        default: "standard user"
-    },
-    createdAt: {
+    createAt:{
         type: Date,
         default: new Date()
     },
-    modifiedAt: {
+    modified:{
         type: Date,
         default: new Date()
-    }    
+    }
 }));
-
 export default User;

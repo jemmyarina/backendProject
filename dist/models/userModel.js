@@ -9,16 +9,18 @@ exports["default"] = void 0;
 
 var _mongoose = _interopRequireDefault(require("mongoose"));
 
-var User = _mongoose["default"].model('Users', new _mongoose["default"].Schema({
+var User = _mongoose["default"].model('User', new _mongoose["default"].Schema({
+  admin: {
+    type: Boolean,
+    "default": false
+  },
   firstName: {
     type: String,
-    required: true,
-    minlength: 2,
-    maxlength: 100
+    required: true
   },
   lastName: {
     type: String,
-    required: false
+    required: true
   },
   email: {
     type: String,
@@ -27,18 +29,13 @@ var User = _mongoose["default"].model('Users', new _mongoose["default"].Schema({
   password: {
     type: String,
     minlength: 6,
-    maxlength: 200,
     required: true
   },
-  role: {
-    type: String,
-    "default": "standard user"
-  },
-  createdAt: {
+  createAt: {
     type: Date,
     "default": new Date()
   },
-  modifiedAt: {
+  modified: {
     type: Date,
     "default": new Date()
   }

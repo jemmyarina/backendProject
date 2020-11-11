@@ -11,6 +11,8 @@ var _jsonwebtoken = _interopRequireDefault(require("jsonwebtoken"));
 
 var _config = _interopRequireDefault(require("../config/config"));
 
+var secreteKey = _config["default"].SECRETE_KEY;
+
 var auth = function auth(req, res, next) {
   var token = req.header('auth-token');
   if (!token) return res.status(401).json({
@@ -18,9 +20,6 @@ var auth = function auth(req, res, next) {
   });
 
   try {
-    // const secreteKey = config.SECRETE_KEY;
-    var secreteKey = _config["default"].SECRETE_KEY;
-
     var verified = _jsonwebtoken["default"].verify(token, secreteKey);
 
     req.user = verified;
@@ -37,7 +36,7 @@ exports.auth = auth;
 var admin = function admin(req, res, next) {
   var admin = req.user.admin;
   if (!admin) return res.status(401).json({
-    msg: 'Acces denied, available for admins only'
+    msg: 'Access denied,this is for admins only!'
   });
   return next();
 };
