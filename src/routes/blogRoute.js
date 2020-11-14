@@ -1,7 +1,8 @@
 import express from 'express';
 import {auth, admin} from '../middleware/authentication';
 import {createblog, readOneBlog, readAllblogs, deleteBlog,updateBlog} from '../controllers/blogController';
-import commentController from '../controllers/commentController'
+import commentController from '../controllers/commentController';
+
 
 const blogRouter = express.Router();
 
