@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+// import {validateblog} from '../middleware/validateBlog';
 
 const Blog = mongoose.model('Blog', new mongoose.Schema({
     bTitle: {

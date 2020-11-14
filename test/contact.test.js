@@ -52,6 +52,7 @@ describe('GET ALL DATA FROM CONTACTS COLLECTION', ()=>{
     beforeEach( async()=>{
         const user = { 
             _id: mongoose.Types.ObjectId().toHexString(),
+            admin:true,
             firstName : "Simon",
             lastName : "Musirikare",
             email : "samuelm@gmail.com",
@@ -81,6 +82,7 @@ describe('DELETING  A MESSAGE BY ID', ()=>{
     beforeEach( async()=>{
         const user = { 
             _id: mongoose.Types.ObjectId().toHexString(),
+            admin : true,
             firstName : "Simon",
             lastName : "Musirikare",
             email : "samuelm@gmail.com",
@@ -116,6 +118,7 @@ describe('DELETING  A MESSAGE BY ID', ()=>{
     beforeEach( async()=>{
         const user = { 
             _id: mongoose.Types.ObjectId().toHexString(),
+            admin : true,
             firstName : "Simon",
             lastName : "Musirikare",
             email : "samuelm@gmail.com",

@@ -57,23 +57,23 @@ describe('POSTING DATA IN A BLOG', ()=>{
 //  GET ALL RECORDS
 describe('GET ALL DATA FROM A BLOG COLLECTION', ()=>{
     
-    beforeEach( async()=>{
-        const user = { 
-            _id: mongoose.Types.ObjectId().toHexString(),
-            firstName : "Simon",
-            lastName : "Musirikare",
-            email : "samuelm@gmail.com",
-            password : "samuel1234"
-        }
-        token = generateToken(user);
-    });
+    // beforeEach( async()=>{
+    //     const user = { 
+    //         _id: mongoose.Types.ObjectId().toHexString(),
+    //         firstName : "Simon",
+    //         lastName : "Musirikare",
+    //         email : "samuelm@gmail.com",
+    //         password : "samuel1234"
+    //     }
+    //     token = generateToken(user);
+    // });
 
-    afterEach(async () => await Blog.remove());
+    // afterEach(async () => await Blog.remove());
     
     it('It should read a blog', async()=>{
        const res = await request (app)
             .get('/selectBlogs')
-            .set('auth-token', token)
+            // .set('auth-token', token)
         
         expect(res.status).toBe(200);  
         // done();

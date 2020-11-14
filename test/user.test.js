@@ -18,7 +18,7 @@ let token;
 
 
 // POST
-describe('POSTING DATA WITH SIGNUP', ()=>{
+describe('USER SIGNUP AND LOGIN', ()=>{
     let sign;
     beforeEach(()=>{
         sign = {
@@ -29,52 +29,69 @@ describe('POSTING DATA WITH SIGNUP', ()=>{
         }
     });
 
-    // afterEach(async () => await User.deleteMany());
+    afterEach(async () => await User.deleteMany());
     
-    it('It should send and save a new message', async()=>{
+    it('It should allow a new user signing up', async()=>{
         await request (app)
             .post('/insertUser')
             .send(sign);
         
         expect(sign).not.toBe(null);  
     })
+});
+
+describe('USER SIGNUP AND LOGIN', ()=>{
+    it("it should login", async () => {
+        const user = {
+            firstName : "Peter", 
+            lastName : "Mugabo", 
+            email : "mugabo@gmail.com",
+            password : "1234567"
+            }
+        const res = await request(app)
+            .post('/users/login')
+            .send(user);
+        expect(user).not.toBe(null)
+    });
         
-})
+});
 
 // //DELETING A USER
-//  describe('DELETING  A USER', ()=>{
-//     let user;
-//     beforeEach( async()=>{
-//         const user = { 
-//             _id: mongoose.Types.ObjectId().toHexString(),
-//             firstName : "jemima",
-//             lastName : "safari",
-//             email : "jemima123@gmail.com",
-//             password : "jemaim123"
-//         }
-//         token = generateToken(user);
+ describe('DELETING  A USER', ()=>{
 
-//         user = {
-//             firstName : "dan", 
-//             lastName : "iriho", 
-//             email : 'dan123@gmail.com',
-//             password : "dan123"
-//         }
-//     });
-//     afterEach(async () => await User.remove());
+     let user;
+     
+    beforeEach( async()=>{
+        const user = { 
+            _id: mongoose.Types.ObjectId().toHexString(),
+            admin: true,
+            firstName : "jemima",
+            lastName : "safari",
+            email : "jemima123@gmail.com",
+            password : "jemaim123"
+        }
+        token = generateToken(user);
+  
+    });
+    afterEach(async () => await User.remove());
     
-//     it('It should delete a user by ID', async(done)=>{
-//         const userToDelete = await User(user);
-//         const deletedUser = await userToDelete.save();
-//         const id = deletedUser._id;
-//         const res = await request (app)
-//             .delete(`/deleteUser/${id}`)
-//             .set('auth-token', token)
+    it('It should delete a user by ID', async(done)=>{
+        const userToDelete = await User({
+            firstName : "dan", 
+            lastName : "iriho", 
+            email : 'dan123@gmail.com',
+            password : "dan123"
+        });
+        const deletedUser = await userToDelete.save();
+        const id = deletedUser._id;
+        const res = await request (app)
+            .delete(`/deleteUser/${id}`)
+            .set('auth-token', token)
         
-//         expect(res.status).toBe(200);  
-//         done();
-//     });     
-// });
+        expect(res.status).toBe(200);  
+        done();
+    });     
+});
 
 // GET
 describe('GETTING DATA OF ALL USERS', ()=>{
